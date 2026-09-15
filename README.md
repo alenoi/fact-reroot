@@ -82,6 +82,72 @@ back — while actually proving nothing, because it was never blind. Step 2's
 is not free: the entry has to be quarantined (moved aside for the duration
 of the check) or the check has to run somewhere that file is not loaded.
 
+## Prior art, and what this actually adds
+
+Almost none of the parts here are new. Blind verification, provenance chains,
+propagating retraction, a three-way verdict on a claim against evidence — each
+has a literature behind it, parts of it decades old.
+
+The blindness in step 4 is Chain-of-Verification's. In the factored variant,
+Dhuliawala et al. answer each verification question in a prompt that withholds
+the original draft: "Those prompts do not contain the original baseline
+response and are hence not prone to simply copying or repeating it" (§3.3).
+Step 4's hard prohibition was published in 2023.
+
+The provenance machinery is older. Doyle's truth maintenance system (1979) and
+de Kleer's assumption-based variant (1986) separated premise nodes from derived
+ones, recorded the justification behind every belief, and propagated a
+retraction through everything derived from it. Step 2's
+observation-versus-inference split and step 6's walk down the chain are that
+structure in markdown. AGM belief revision gave retraction its formal
+semantics; its belief-base versus belief-set distinction cuts in the same place.
+
+The verdicts are borrowed too. FEVER (Thorne et al., 2018) fixed the field's
+vocabulary for adjudicating a claim against evidence as SUPPORTED / REFUTED /
+NOTENOUGHINFO; three of the four verdicts here rebadge it, and only STALE sits
+outside the scheme.
+
+Shipped agent-memory frameworks do detect contradictions between stored records
+and resolve them — by recency, by weighting sources for reliability, by
+cryptographic ancestry, or by giving an LLM judge both versions. None goes back
+to the artefact the claim is about. Eywa, a provenance-grounded memory
+architecture, says as much about itself: "Provenance establishes source support,
+not external truth... world-level truth verification remains outside the memory
+layer."
+
+What is left unoccupied is small. Blind re-derivation applied to cross-session
+persistent memory rather than to an answer generated in flight, since CoVe has
+no store and its problem ends when the run does. The auto-load consequence:
+Anthropic documents that a non-fork sub-agent inherits the whole `CLAUDE.md`
+hierarchy at startup, but no one appears to have drawn the verification
+consequence from it — blindness is unavailable by default and has to be bought.
+And STALE as a fourth verdict folded into a support/refute scheme; temporal
+validity is studied, but as its own task.
+
+Whether that gap is worth filling is not this repository's call. A survey of
+memory for autonomous LLM agents lists among its open challenges "External
+validation (check reflections against ground truth when available), uncertainty
+quantification (decay confidence over time without confirming evidence),
+adversarial probing (periodically challenge stored beliefs with
+counterexamples)" (§9.3), and names no reviewed system that checks stored
+memories against external primary evidence.
+
+One caveat, on step 6. Attaching provenance to a corrected record assumes a
+later reader uses it, and the evidence for that assumption is not encouraging.
+In a study of 26 researchers given a claim-evidence interface over LLM-generated
+scholarly text, granular provenance "significantly lowered participants' trust
+compared to the baseline", yet "this increased caution did not translate to
+behavioral changes" — they kept relying on the output regardless. Step 6 makes
+a record honest. It does not make the next reader careful.
+
+References: Dhuliawala et al., "Chain-of-Verification Reduces Hallucination in
+Large Language Models", arXiv:2309.11495 (2023), ACL Findings 2024 · Doyle, "A
+Truth Maintenance System" (1979) · de Kleer, assumption-based TMS (1986) ·
+Thorne et al., FEVER (2018) · "Memory for Autonomous LLM Agents",
+arXiv:2603.07670 · Eywa, arXiv:2605.30771 · Martin-Boyle et al., "PaperTrail: A
+Claim-Evidence Interface for Grounding Provenance in LLM-based Scholarly Q&A",
+CHI 2026, arXiv:2602.21045.
+
 ## Worked example
 
 A memory file says a project's log parser lives at `src/parsers/log.py`.

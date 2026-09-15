@@ -172,6 +172,11 @@ silently destroyed the method, and the run will still look like it succeeded, be
 of the same 87%-vs-committed effect this skill exists to route around — the moment the
 agent sees the prior answer, it starts defending it instead of deriving it.
 
+The principle is not this skill's own: Chain-of-Verification withholds the original
+response from its verification prompts for exactly this reason (Dhuliawala et al.,
+arXiv:2309.11495). What is specific here is applying it to a claim stored in a previous
+session rather than to an answer being drafted in the current one.
+
 **If step 2 flagged the claim as living in an auto-loading file**, blindness is not
 available by default and you have to buy it. In order of preference: quarantine the
 entry first — move it aside into the config's `quarantineDir`, or any directory nothing
@@ -206,6 +211,9 @@ decision or ship to the user. Issue exactly one verdict:
 - **STALE** — it was true when written and no longer is: the file moved, the flag
   changed, the price changed, the repo got restructured. This is the common case for
   memories about paths, flags and prices — check it before reaching for REFUTED.
+
+The first three follow the standard three-way vocabulary of fact verification —
+SUPPORTED / REFUTED / NOTENOUGHINFO, after FEVER — and STALE is the addition.
 
 If the two blind agents disagree, that's not settled by picking the more confident
 answer or averaging — read the primary evidence yourself and decide.
