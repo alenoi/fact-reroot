@@ -1,0 +1,14 @@
+{
+  "name": "fact-reroot-marketplace",
+  "owner": {
+    "name": "alenoi",
+    "email": "67100159+alenoi@users.noreply.github.com"
+  },
+  "plugins": [
+    {
+      "name": "fact-reroot",
+      "source": "./",
+      "description": "Re-verifies one specific stored claim from a clean, uncontaminated context instead of arguing with the context that produced it, fixing context poisoning, memory poisoning (OWASP ASI06) and hallucination snowballing by tracing the claim's provenance, blindly re-deriving it against primary evidence, and adjudicating CONFIRMED, REFUTED, UNSUPPORTED or STALE."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "recordStores": [
+    {
+      "path": "C:\\Users\\jdoe\\.claude\\memory\\_other",
+      "kind": "agent-memory",
+      "autoLoads": true,
+      "note": "Auto-memory index and its per-topic files; the harness loads these into every session automatically, so a sub-agent spawned to re-check a claim stored here is not blind by default."
+    },
+    {
+      "path": "/home/jdoe/.claude/CLAUDE.md",
+      "kind": "instructions",
+      "autoLoads": true,
+      "note": "Global instructions file read at the start of every session. If the claim under review was ever asserted here, step 4 must quarantine the entry or run the blind check somewhere this file is not loaded."
+    },
+    {
+      "path": "C:\\Users\\jdoe\\digests\\project-x",
+      "kind": "digest",
+      "autoLoads": false,
+      "note": "Nightly cross-machine digest cache for project-x, consulted only when explicitly opened. Safe ground for a blind sub-agent as long as nothing points it there."
+    }
+  ],
+  "primarySources": [
+    {
+      "path": "/home/jdoe/vaults/work-notes",
+      "kind": "notes",
+      "git": false,
+      "note": "Personal note vault. Dated entries written at the time of a decision or observation count as primary evidence; later notes that merely restate the claim are witnesses, not evidence."
+    },
+    {
+      "path": "C:\\src\\project-x",
+      "kind": "repos",
+      "git": true,
+      "note": "Source repository for project-x. A claim about a file path, config value or function signature is verified against this repo's current working tree, not against a memory entry's cached description of it."
+    }
+  ],
+  "quarantineDir": "C:\\Users\\jdoe\\.claude\\fact-reroot-quarantine",
+  "blindCheck": {
+    "agents": 2,
+    "checkExternalLiterature": true
+  }
+}

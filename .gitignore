@@ -1,0 +1,12 @@
+# Harness working state — never part of the plugin itself.
+.claude/
+.claude/worktrees/
+
+# Rendered per-machine config. The committed artefact is the example,
+# never someone's real paths.
+fact-reroot.config.json
+
+# OS cruft
+Thumbs.db
+desktop.ini
+.DS_Store
